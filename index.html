@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style></style>
+  </head>
+
+  <body
+    style="
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      background: green;
+    "
+  >
+    <div class="row justify-content-center">
+      <div class="col-4">
+        <form enctype="multipart/form-data" id="form">
+          <div class="row"
+          
+          style="
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 2rem;
+          margin-top: 2rem;
+      
+        "
+          >
+            <div class="col-8">
+              <input
+                type="file"
+                class="form-control"
+                name="image"
+                id="images"
+                multiple
+              />
+            </div>
+            <div class="col-2">
+              <input
+                type="submit"
+                class="btn btn-warning"
+                value="Upload Images"
+              />
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </body>
+  <script>
+    let form = document.getElementById("form");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      //fetch post
+      fetch("http://localhost:8080/upload", {
+        method: "post",
+        body: formData,
+      })
+        .then((res) => {
+          console.log(res.json);
+          return res.json();
+        })
+        .catch((err) => console.log(err));
+    });
+  </script>
+</html>
